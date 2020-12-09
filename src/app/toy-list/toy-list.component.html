@@ -1,0 +1,29 @@
+<h3>Lista de juguetes</h3>
+<table class="table text-center">
+    <thead>
+        <tr>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Cantidad</th>
+            <th>Compra</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let toy of toys" [ngClass]="{'clearance': toy.clearance}">
+            <td> <img width="90" class="img-thumbnail" [src]="toy.image" [alt]="toy.name"></td>
+            <td>{{toy.name}}</td>
+            <td>{{toy.type}}</td>
+            <td>{{toy.price | currency: 'USD'}}</td>
+            <td> <span *ngIf="toy.stock>0"> {{toy.stock}} </span> <span class="badge badge-warning" *ngIf="toy.stock==0"> Sin stock </span></td>
+            <td> 
+                <app-input-integer [(quantity)]="toy.quantity" [max]="toy.stock" *ngIf="toy.stock" (maxReached)="maxReached($event)"></app-input-integer>
+            </td>
+            <td>
+                <button class="btn btn-primary" (click)="addToCart(toy)">Comprar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,7 +1,13 @@
 <h3>Carrito de compras</h3>
-
-<ul>
-    <li *ngFor="let beer of (cartList$ | async)" >
-        {{beer.name}}: {{beer.quantity}}
-    </li>
-</ul>
+<div class="cart">
+    <ul>
+        <li *ngFor="let toy of (cartList$ | async)" >
+            <span *ngIf="toy.quantity>0">
+            {{toy.name}}: {{toy.quantity}} --> {{toy.price | currency: 'USD'}}
+            </span>
+            <span *ngIf="toy.quantity==0">
+                Seleccione cantidad
+            </span>
+        </li>
+    </ul>
+</div>
